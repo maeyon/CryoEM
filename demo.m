@@ -8,17 +8,22 @@
 
 %出力：始点S から間隔e ごとにとったスプライン曲線上の補間した「画素値の列」とその「位置座標」
 
-%画像を読み込む (in: 画像, out: x, y)
-readjpg
+%画像を読み込む (in: 画像, out: y, t)
+%y = (x, y, 輝度値)
+%t = (x, y)
+myreadjpg
 
-%スプライン補間 (in: x, y, out:X, Y)
-spline(x, y)
+%スプライン補間 (in: t, out:T)
+%T = (x, y)
+T = myspline(t);
 
-%曲線上に間隔eごとにプロット (in:X, Y, out:mu)
-eplot(X, Y)
+%曲線上に間隔eごとにプロット (in:T, out:mu)
+%mu = (x, y, 輝度値=0)
+mu = myplot(T);
 
-%曲線上の輝度値の推定 (in:mu, out:)
-bright
+%曲線上の輝度値の推定 (in:y, mu, out:mu)
+%mu = (x, y, 輝度値)
+mu = mybright(y, mu);
 
 %フーリエ変換
-L = fft()
+L = fft(mu);
