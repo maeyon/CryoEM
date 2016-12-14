@@ -2,7 +2,7 @@
 function mu = mybright(y, mu)
 
 %—×Ú‚·‚é4‚Â‚Ì‰æ‘f‚ğŒ©‚Â‚¯‚é
-nu(i,j) = y
+nu(i,j) = y;
 
 %‹P“x’l‚Ì„’è
 g = 500;

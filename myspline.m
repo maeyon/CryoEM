@@ -1,7 +1,6 @@
-w
 %スプライン補間 (in: t, out:T)
 %T = (x, y)
-function T = myspline(t)
+function [T, l] = myspline(t)
 % 定義
 N = length(t(:,1));
 h = zeros(N, 2);
@@ -54,4 +53,9 @@ for j = 0 : N-1
         T(:, 2) = S(j);
     end
 end
+
+%始点からの曲線上の距離を不定積分で求める
+syms T(:, 1)
+u = int(sqrt(1 + diff(T(:, 2), T(:, 1))^2));
+l = 
 end

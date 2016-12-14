@@ -15,17 +15,22 @@ filename='F2609_contrast_adjusted.jpg';
 %t = (x, y)
 [y, t]=myread(filename);
 
-%スプライン補間 (in: t, out:T)
+%スプライン補間 (in: t, out:T, l)
 %T = (x, y)
-myspline(t);
+%l:始点から終点までの曲線の長さ
+
+[T, l] = myspline(t);
 
 %曲線上に間隔eごとにプロット (in:T, out:mu)
 %mu = (x, y, 輝度値=0)
+%n:任意の整数。ここを変数にしてeの大きさを変える
+
+e = l / n;
 myplot(T);
 
-%曲線上の輝度値の推定 (in:y, mu, out:mu)
+%曲線上の輝度値の推定 (in:y, mu, g, out:mu)
 %mu = (x, y, 輝度値)
-mybright(y, mu);
+mybright(y, mu, g);
 
 %フーリエ変換
 L = fft(mu);
