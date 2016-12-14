@@ -15,3 +15,4 @@ for i = 0:100
     end
     mu(i, 3) = symsum(w(i, j) * nu(i, j, 3); j; 1; 4)
 end
+end

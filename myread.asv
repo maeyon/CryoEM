@@ -1,0 +1,17 @@
+%‰æ‘œ‚Ì“Ç‚İ‚İ
+function [y, t] = myread()
+
+y = imread('F2609_contrast_adjusted.jpg');
+A = size(y);
+for i = 0 : 10
+    for j = 1:A(1)
+        for k = 1:A(2)
+            if y(j, k) == 65535
+                continue
+            end
+            continue
+        end
+        
+        t(i) = [j, k];
+    end
+end

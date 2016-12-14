@@ -1,7 +1,7 @@
+w
 %スプライン補間 (in: t, out:T)
 %T = (x, y)
 function T = myspline(t)
-
 % 定義
 N = length(t(:,1));
 h = zeros(N, 2);
@@ -53,4 +53,5 @@ for j = 0 : N-1
     if T(:, 1) >= t(j, 1) && T(:, 1) <= t(j+1, 1)
         T(:, 2) = S(j);
     end
+end
 end
