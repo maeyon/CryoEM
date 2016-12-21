@@ -1,6 +1,6 @@
-%スプライン補間 (in: t, out:T)
-%T = (x, y)
-function [T, l] = myspline(t)
+%スプライン補間 (in: t, out:a)
+%a = (a, b, c, d)
+function [a] = myspline(t)
 % 定義
 N = length(t(:,1));
 h = zeros(N, 2);
@@ -38,8 +38,9 @@ S = zeros(N, 1);
 u(0) = 0;
 u(N) = 0;
 G = inv(H);
-T = zeros(10000, 2);
-T(:, 1) = t(0, 1):(t(N, 1)-t(0, 1))/10000:t(N, 1);
+Tx = zeros(10000);
+Ty = zeros(10000);
+Tx = t(0, 1):(t(N, 1)-t(0, 1))/10000:t(N, 1);
 for j = 0 : N-1
     if j ~= N-1
         u(j+1) = symsum(G(j+1, i) * v(i), i, 1, N-1);
@@ -48,14 +49,12 @@ for j = 0 : N-1
     b(j) = u(j) / 2;
     c(j) = h(j, 2) / h(j, 1) - h(j, 1)*(2*u(j)+u(j+1)) / 6;
     d(j) = t(j, 2);
-    S(j) = a(j)*(T(:, 1)-t(j, 1))^3 + b(j)*(T(:, 1)-t(j, 1))^2 + c(j)*(T(:, 1)-t(j, 1)) + d(j);
-    if T(:, 1) >= t(j, 1) && T(:, 1) <= t(j+1, 1)
-        T(:, 2) = S(j);
+    S(j) = a(j)*(Tx - t(j, 1))^3 + b(j)*(Tx - t(j, 1))^2 + c(j)*(Tx - t(j, 1)) + d(j);
+    if Tx >= t(j, 1) && Tx <= t(j+1, 1)
+        Ty = S(j);
     end
 end
 
-%始点からの曲線上の距離を不定積分で求める
-syms T(:, 1)
-u = int(sqrt(1 + diff(T(:, 2), T(:, 1))^2));
-l = 
+S = [a(:) b(:) c(:) d(:)];
+
 end

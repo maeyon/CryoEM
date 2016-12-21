@@ -2,7 +2,7 @@
 function mu = myplot(T, y)
 
 %ä‘äueÇ≤Ç∆Ç…ÉvÉçÉbÉg
-mu = zeros(101, 3);
+mu = zeros(101, 2);
 for i = 0:100
     for j = 0:100
         for k = 0:10000
