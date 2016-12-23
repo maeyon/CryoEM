@@ -55,6 +55,6 @@ for j = 0 : N-1
     end
 end
 
-S = [a(:) b(:) c(:) d(:)];
+s = [a(:) b(:) c(:) d(:)];
 
 end
