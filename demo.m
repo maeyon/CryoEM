@@ -13,23 +13,24 @@ filename='F2609_contrast_adjusted.jpg';
 %画像を読み込む (in: 画像, out: y, t)
 %y = (x, y, 輝度値)
 %t = (x, y)
-[y, t]=myread(filename);
+[y, t,tc,tr]=myread(filename);
 
-%スプライン補間 (in: t, out:a)
-%a = (a, b, c, d)
-a = myspline(t);
-
-%任意の座標(x, y)における曲線に
-%alpha, beta 
-%u, v 曲線が直線になるような新しい基底
-[alpha, beta, u, v] = proje2spline(t, a, x, y);
+%スプライン補間 (in: t, out:t)
+%t = (a, b, c, d)
+[s,Tx, Ty] = myspline_est(tc,tr);
 
 %曲線上に間隔eごとにプロット (in:T, out:mu)
 %mu = (x, y, 輝度値=0)
 %n:任意の整数。ここを変数にしてeの大きさを変える
 
+%始点から終点までの距離lを測る
+l = sum(sqrt(1+diff(Ty).^2));
+
+%間隔eを決める
+n = 100
 e = l / n;
-myplot(T);
+
+mu = myplot(Tx,Ty,e, s, tc);
 
 %曲線上の輝度値の推定 (in:y, mu, g, out:mu)
 %mu = (x, y, 輝度値)
@@ -38,3 +39,8 @@ mybright(y, mu, g);
 
 %フーリエ変換
 L = fft(mu);
+
+%任意の座標(x, y)における曲線に
+%alpha, beta 
+%u, v 曲線が直線になるような新しい基底
+[alpha, beta, u, v] = proje2spline(t, a, x, y);

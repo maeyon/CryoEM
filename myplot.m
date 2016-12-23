@@ -1,15 +1,15 @@
 %間隔eごとのプロット
-function mu = myplot(T, y)
+function mu = myplot(Tx,Ty, e, s, tc)
 
-%間隔eごとにプロット
-mu = zeros(101, 2);
-for i = 0:100
-    for j = 0:100
-        for k = 0:10000
-            if u(k) == j * e
-                mu(i) = T(k, :);
-            end
-        end
-    end
-end
-end
+d = cumsum(sqrt(1+diff(Ty).^2));
+% for i = 1:10000
+%     d(i) = sum(sqrt(1+diff(Ty(1:i)).^2))
+% end
+
+A = interp1(d,Tx(2:end),[1:100]*e);
+mu = [A myspline(A,s,tc)];
+% for j = 1:100
+%     A(j) = find(d==j*e)
+% end
+% 
+% mu = [Tx(A) ; Ty(A)];
