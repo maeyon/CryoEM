@@ -2,8 +2,9 @@
 function mu = mybright(y, mu)
 
 %—×Ú‚·‚é4‚Â‚Ì‰æ‘f‚ğŒ©‚Â‚¯‚é
-nu(i,j) = y;
+nu =  floor([mu + [0 ; 1] mu + [1 ; 1]  ; mu mu + [1 ; 0]]);
 
+d = norm([mu+[0;1]-floor(mu) mu+[1;1]-floor(mu) ; mu-floor(mu) mu+[1;0]-floor(mu)])
 %‹P“x’l‚Ì„’è
 d = zeros(101, 4);
 w = zeros(101, 4);

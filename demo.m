@@ -43,4 +43,4 @@ L = fft(mu);
 %”CˆÓ‚ÌÀ•W(x, y)‚É‚¨‚¯‚é‹Èü‚É
 %alpha, beta 
 %u, v ‹Èü‚ª’¼ü‚É‚È‚é‚æ‚¤‚ÈV‚µ‚¢Šî’ê
-[alpha, beta, u, v] = proje2spline(t, a, x, y);
+%[alpha, beta, u, v] = proje2spline(t, a, x, y);
