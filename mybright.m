@@ -1,19 +1,16 @@
 %‹P“x’l‚Ì„’è
-function mu = mybright(y, mu)
+function mu = mybright(y, mu_x, mu_y, g)
 
 %—×Ú‚·‚é4‚Â‚Ì‰æ‘f‚ğŒ©‚Â‚¯‚é
-nu =  floor([mu + [0 ; 1] mu + [1 ; 1]  ; mu mu + [1 ; 0]]);
-
-d = norm([mu+[0;1]-floor(mu) mu+[1;1]-floor(mu) ; mu-floor(mu) mu+[1;0]-floor(mu)])
+nu_x = floor([mu_x+1 ; mu_x ; mu_x ; mu_x+1]);
+nu_y = floor([mu_y+1 ; mu_y+1 ; mu_y ; mu_y]);
+nu = [nu_x(:) nu_y(:)];
+ 
 %‹P“x’l‚Ì„’è
-d = zeros(101, 4);
-w = zeros(101, 4);
-for i = 0:100
-    for j = 1 : 3
-        d(i,j) = sqrt((nu(i, 1)-nu(i, j, 1))^2 + (nu(i, 2)-nu(i, j, 2))^2);
-        w(i, j) = exp(- g*d(i, j)^2) / symsum(exp(-g*d(i, k)), k, 1, 4);
-    end
-    y^hat = symsum(w(i, j) * nu(i, j; 3); j; 1; 4)
-end
-mu = [mu y^hat(:)];
+d = (repmat(mu_x,4,1) - nu_x).^2 + (repmat(mu_y,4,1) - nu_y).^2;
+sigma = exp(-g*d);
+denom = sum(sigma);
+omega = sigma ./ repmat(denom, 4, 1);
+mu_z = sum(omega .* y(nu))
+mu = [mu_x mu_y mu_z];
 end

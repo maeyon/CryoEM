@@ -30,12 +30,12 @@ l = sum(sqrt(1+diff(Ty).^2));
 n = 100
 e = l / n;
 
-mu = myplot(Tx,Ty,e, s, tc);
+[mu_x, mu_y] = myplot(Tx,Ty,e, s, tc);
 
 %曲線上の輝度値の推定 (in:y, mu, g, out:mu)
 %mu = (x, y, 輝度値)
 g = 500;
-mybright(y, mu, g);
+mu = mybright(y, mu_x, mu_y, g);
 
 %フーリエ変換
 L = fft(mu);

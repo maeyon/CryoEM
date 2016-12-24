@@ -1,4 +1,4 @@
-%â€°Ã¦â€˜Å“â?ÃŒâ?Ã??ÃÂÅ¾â€šÃ?
+%‰æ‘œ‚Ì“Ç‚İ‚İ
 function [y, t,tc,tr] = myread(filemame)
 
 y = imread(filemame);
