@@ -2,6 +2,7 @@
 function [y,tc,tr] = myread(filemame)
 y = imread(filemame);
 [temp_tc,temp_tr] = find(y(:,:,1)==255 & y(:,:,2)==255 & y(:,:,3)==255);
-[tc, I]= sort(temp_tc);
+[, I]= sort(temp_tc);
+tc = temp_tc(I);
 tr = temp_tr(I);
 end

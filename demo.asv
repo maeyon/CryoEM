@@ -18,9 +18,7 @@ filename='F2609_contrast_adjusted_update.jpg';
 
 %スプライン補間 (in: t, out:t)
 %t = (a, b, c, d)
-s = myspline_est(tc,tr);
-Tx = tc(1):(tc(end)-tc(1))/10000:tc(end);
-Ty = myspline(Tx,s,tc);
+[s] = myspline_est(tc,tr);
 
 %曲線上に間隔eごとにプロット (in:T, out:mu)
 %mu = (x, y, 輝度値=0)
