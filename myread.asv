@@ -1,8 +1,0 @@
-%‰æ‘œ‚Ì“Ç‚İ‚İ
-function [y,tc,tr] = myread(filemame)
-y = imread(filemame);
-[temp_tc,temp_tr] = find(y(:,:,1)==255 & y(:,:,2)==255 & y(:,:,3)==255);
-[, I]= sort(temp_tc);
-tc = temp_tc(I);
-tr = temp_tr(I);
-end
