@@ -1,9 +1,0 @@
-%‰æ‘f’l‚ğXV‚·‚é
-%function [y] = myprepare(filemame)
-
-filename = 'F2609_contrast_adjusted.jpg';
-y = imread(filemame);
-y = max(0, y-1);
-filename_2 = strcat(filename,'_update');
- 
-imwrite(y, filename_2)

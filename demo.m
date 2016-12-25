@@ -8,6 +8,7 @@
 
 %出力：始点S から間隔e ごとにとったスプライン曲線上の補間した「画素値の列」とその「位置座標」
 
+z=imread('F2609_contrast_adjusted.jpg');
 filename='F2609_contrast_adjusted_update.jpg';
 
 %画像を読み込む (in: 画像, out: y, t)
@@ -27,7 +28,7 @@ filename='F2609_contrast_adjusted_update.jpg';
 l = sum(sqrt(1+diff(Ty).^2));
 
 %間隔eを決める
-n = 100
+n = 100;
 e = l / n;
 
 [mu_x, mu_y] = myplot(Tx,Ty,e, s, tc);
@@ -35,7 +36,7 @@ e = l / n;
 %曲線上の輝度値の推定 (in:y, mu, g, out:mu)
 %mu = (x, y, 輝度値)
 g = 500;
-mu = mybright(y, mu_x, mu_y, g);
+mu = mybright(z, mu_x, mu_y, g);
 
 %フーリエ変換
 L = fft(mu);
