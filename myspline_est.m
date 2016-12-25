@@ -1,23 +1,30 @@
-%ƒXƒvƒ‰ƒCƒ“•âŠÔ (in: t, out:a)
+%ã‚¹ãƒ—ãƒ©ã‚¤ãƒ³è£œé–“ (in: t, out:a)
 %s = (a, b, c, d)
 function s = myspline_est(tc,tr)
-% ’è‹`
-h = tc(2:end)-tc(1:end-1);
+% tc should be length N+1 in PDF
+% å®šç¾© 
+h = tc(2:end)-tc(1:end-1); % h would be length N in PDF.
 v_1 = tr(3:end)-tr(2:end-1)./h(2:end);
 v_2 = tr(2:end-1)-tr(1:end-2)./h(1:end-1);
-v = 6*(v_1 - v_2);
+v = 6*(v_1 - v_2);  % v would be length N-1 in PDF.
 
-%s—ñH‚Ì¶¬
-diagH_0 = 2*(h(1:end-1) + h(2:end));
-N = length(diagH_0);
-H_0 = diag(diagH_0);
-diagH_1 = h(2:end-1);
-H_1 = [zeros(N-1,1), diag(diagH_1) ; zeros(1,N)];
-H_2 = [zeros(1,N) ; diag(diagH_1), zeros(N-1,1)];
-H = H_0 + H_1 + H_2;
+%è¡Œåˆ—Hã®ç”Ÿæˆ
+diagH_0 = 2*(h(1:end-1) + h(2:end)); % length N-1 in PDF
+N = length(diagH_0); % N-1 in PDF
+H = diag(diagH_0);
+index = sub2ind([N,N],[1:N-1],[2:N]);
+H(index) = h(2:end-1);
+index = sub2ind([N,N],[2:N],[1:N-1]);
+H(index) = h(2:end-1);
+% H_0 = diag(diagH_0);
+% diagH_1 = h(2:end-1);
+%H_1 = [zeros(N-1,1), diag(diagH_1) ; zeros(1,N)];
+%H_2 = [zeros(1,N) ; diag(diagH_1), zeros(N-1,1)];
+%H = H_0 + H_1 + H_2;
 
-%u, a,b,c,d, ‹æ•ª‘½€®, ‹Èü‚ğ‹‚ß‚é
-w = H\v(:);
+%u, a,b,c,d, åŒºåˆ†å¤šé …å¼, æ›²ç·šã‚’æ±‚ã‚ã‚‹
+w = inv(H)*v(:);
+%w = H\v(:);
 u = [0 ; w(:) ; 0];
 a = (u(2:end) - u(1:end-1)) ./ (6*h);
 b = u(1:end-1) / 2;
