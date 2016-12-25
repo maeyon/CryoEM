@@ -3,7 +3,7 @@
 function [s,Tx,Ty] = myspline_est(tc,tr)
 % ’è‹`
 h = tc(2:end)-tc(1:end-1);
-v = 6*((tr(3:end)-tr(2:end-1))./h(2:end-1) + tr(2:end-1)-tr(1:end-2)./h(1:end-2));
+v = 6*((tr(3:end)-tr(2:end-1))./h(2:end) + tr(2:end-1)-tr(1:end-2)./h(1:end-1));
 
 %s—ñH‚Ì¶¬
 diagH = 2*(h(1:end-2) + h(2:end-1));

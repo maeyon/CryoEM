@@ -8,16 +8,16 @@
 
 %出力：始点S から間隔e ごとにとったスプライン曲線上の補間した「画素値の列」とその「位置座標」
 
-filename='F2609_contrast_adjusted.jpg';
+filename='F2609_contrast_adjusted_update.jpg';
 
 %画像を読み込む (in: 画像, out: y, t)
 %y = (x, y, 輝度値)
 %t = (x, y)
-[y, t,tc,tr]=myread(filename);
+[y,tc,tr]=myread(filename);
 
 %スプライン補間 (in: t, out:t)
 %t = (a, b, c, d)
-[s,Tx, Ty] = myspline_est(tc,tr);
+[s,Tx,Ty] = myspline_est(tc,tr);
 
 %曲線上に間隔eごとにプロット (in:T, out:mu)
 %mu = (x, y, 輝度値=0)
