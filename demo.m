@@ -41,8 +41,9 @@ g = 5;
 mu = mybright(z, mu_x, mu_y, g, n);
 
 %フーリエ変換
-L = fft(mu);
-
+%q = [0, cumsum(sqrt(1+(diff(mu_y)./diff(mu_x)).^2))];
+mu_z = mu(:,3);
+L = fft(mu_z);
 %任意の座標(x, y)における曲線に
 %alpha, beta 
 %u, v 曲線が直線になるような新しい基底
