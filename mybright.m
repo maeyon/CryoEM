@@ -1,5 +1,5 @@
 %‹P“x’l‚Ì„’è
-function mu = mybright(z, mu_x, mu_y, g, n)
+function mu_z = mybright(z, mu_x, mu_y, g, n)
 
 %—×Ú‚·‚é4‚Â‚Ì‰æ‘f‚ğŒ©‚Â‚¯‚é
 nu_x = floor([mu_x+1 ; mu_x ; mu_x ; mu_x+1]);
@@ -12,5 +12,5 @@ denom = sum(sigma);
 omega = sigma ./ repmat(denom, 4, 1);
 Ind = sub2ind(size(z), nu_x(:), nu_y(:));
 mu_z = sum(omega .*reshape(double(z(Ind)),4, n));
-mu = [mu_x mu_y mu_z];
+%mu = [mu_x mu_y mu_z];
 end
