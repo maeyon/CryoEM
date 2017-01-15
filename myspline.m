@@ -1,6 +1,4 @@
-%スプライン補間 (in: t, out:a)
-%s = (a, b, c, d)
-function Ty = myspline(Tx,s,tc)
+function Ty = myspline(Tx,s,tc) %スプライン補間
 a = s(:,1);
 b = s(:,2);
 c = s(:,3);

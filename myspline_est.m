@@ -1,6 +1,4 @@
-%スプライン補間 (in: t, out:a)
-%s = (a, b, c, d)
-function s = myspline_est(tc,tr)
+function s = myspline_est(tc,tr) %スプライン補間 (in: t, out:a)
 % tc should be length N+1 in PDF
 % 定義 
 h = tc(2:end)-tc(1:end-1); % h would be length N in PDF.
@@ -22,9 +20,9 @@ H(index) = h(2:end-1);
 %u, a,b,c,d, 区�?���?�? 曲線を求め�?
 w = inv(H)*v(:);
 u = [0 ; w(:) ; 0];
-a = (u(2:end) - u(1:end-1)) ./ (6*h);
+a = diag((u(2:end) - u(1:end-1))./(6*h));
 b = u(1:end-1) / 2;
-c = j - h(1:end).*(2*u(1:end-1)+u(2:end))/6;
+c = diag(j - h(1:end).*(2*u(1:end-1)+u(2:end))/6);
 %c = (tr(2:end) - tr(1:end-1)) ./ h(1:end) - h(1:end).*(2*u(1:end-1)+u(2:end))/6;
 d = tr(1:end-1);
 s = [a(:) b(:) c(:) d(:)];

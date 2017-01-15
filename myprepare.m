@@ -1,7 +1,5 @@
-%画素値を更新する
-%function [b] = myprepare(filemame)
-filename = 'F2609_contrast_adjusted.jpg';
-a = imread(filename);
-b = max(0, a-100);
-%filename_2 = strcat(filename,'_update');
-imwrite(b,'F2609_contrast_adjusted_update.jpg');
+function [y, z, filename_new] = myprepare(filename) %画素値の更新
+y = imread(filename);
+z = max(0, y-100);
+filename_new = strrep(filename, '.jpg', '_update.jpg');
+imwrite(z,filename_new);

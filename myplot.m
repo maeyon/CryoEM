@@ -1,6 +1,5 @@
-%間隔eごとのプロット
-function [mu_x, mu_y] = myplot(Tx,Ty, e, s, tc)
-d = cumsum(sqrt(1+diff(Ty).^2));
-mu_x = interp1(d,Tx(2:end),[1:100]*e);
+function [mu_x, mu_y] = myplot(Tx,dx, dy, e, s, tc, n) %間隔eごとのプロット
+d = cumsum(sqrt(dx^2 + dy.^2));
+mu_x = interp1(d,Tx(2:end),[1:n]*e);
 mu_y = myspline(mu_x,s,tc);
 end
