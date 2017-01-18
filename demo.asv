@@ -17,19 +17,23 @@ s = myspline_est(tc,tr);%スプライン補間
 dx = (tc(end)-tc(1))/10000;
 Tx = tc(1):dx:tc(end);
 Ty = myspline(Tx,s,tc);
-
 dy = diff(Ty);
 l = sum(sqrt(dx^2+dy.^2)); %始点から終点までの距離lを測る
-n = 2000;
-e = l / n; %間隔
-[mu_x, mu_y] = myplot(Tx, dx, dy, e, s, tc, n); %曲線上に間隔eごとにプロット
+n = floor(l/3);
+e = l/n; %間隔
+[mu_x, mu_y, u, v] = myplot(Tx,dx, dy, e, s, tc, n); %曲線上に間隔eごとにプロット
 
 g = 5; %重み
-mu_z = mybright(z, mu_x, mu_y, g, n); %曲線上の輝度値の推定 (in:y, mu, g, out:mu)
+[mu_z, w] = mybright(z, mu_x, mu_y, u, v, g, n); %曲線上の輝度値の推定 (in:y, mu, g, out:mu)%mu_z = mybright(z, mu_x, mu_y, g, n);
+m=(2*ceil(100/e)+1);
+l_2 = sqrt((u(end,:)-u(1,:)).^2+((v(end,:)-v(1,:)).^2));%法線の長さ
 
 [B, f] = myfft(mu_z,n,l); %フーリエ変換
 L = 1/f(B == max(B));
-%myfft2()
+
+[B_x,B_y,f_x,f_y]=myfft2(w,n,m,l,l_2);%二次元フーリエ変換
+L_x = 1/f_x(B_x == max(B_x));
+L_y = 1/f_y(B_y == max(B_y));
 
 %任意の座標(x, y)における曲線に
 %alpha, beta 
