@@ -13,3 +13,4 @@ for i = 1:length(slop)
     u(:,i) = slop(i)*(v(:,i)-mu_y(i))+mu_x(i);
 end
 end
+
