@@ -1,15 +1,15 @@
-function I_P = double_helix(T_C, a)%[I_P i_p] = double_helix(T_C, a)
-u = 0:1200;
-v = -50:50;
-w = -50:50;
+function I_P = double_helix_imp2(T_C, a)%[I_P i_p] = double_helix(T_C, a)
+u = -0.25:0.5:1200.25;
+v = -50.25:0.5:50.25;
+w = -50.25:0.5:50.25;
 R = length(v)/20;%中心円の半径
 r = R;%螺旋分子の半径
 %T_C = 100; %max(u)/12;%中心の周期
 T_S = 75; %6/4*T_C;%輝度値の周期
-V_1 = R*cos(2*pi*u/T_C)+50;%螺旋1の中心のx座標
-W_1 = R*sin(2*pi*u/T_C)+50;%螺旋1の中心のy座標
-V_2 = -R*cos(2*pi*u/T_C)+50;%螺旋2の中心のx座標
-W_2 = -R*sin(2*pi*u/T_C)+50;%螺旋2の中心のy座標 
+V_1 = R*cos(2*pi*u/T_C)+100;%螺旋1の中心のx座標
+W_1 = R*sin(2*pi*u/T_C)+100;%螺旋1の中心のy座標
+V_2 = -R*cos(2*pi*u/T_C)+100;%螺旋2の中心のx座標
+W_2 = -R*sin(2*pi*u/T_C)+100;%螺旋2の中心のy座標 
 %a = 0.1;
 b = 0.5;%変えない方が良い
 c = 0.3-a; %aより大きな値の方が良い
@@ -36,12 +36,12 @@ for i=1:length(u)
     end
 end
 I_P = permute(sum(I, 3),[2,1,3]);%w方向に射影%I_P = permute(sum(I, 2),[3,1,2]);%v方向に射影
-I_P_noise = I_P + 2*randn(size(I_P)); %noiseを加えたい場合
-image(I_P,'XData',u,'YData',v), axis image,colormap(jet(35));xlabel('u');ylabel('v');%投影図を図示
-% imshow(I_P/101, 'InitialMagnification','fit');
-
-i_p=fftshift(fft2(I_P));
- x = (-0.5:1/1200:0.5);
- y = (-0.5:1/100:0.5);
- image(abs(i_p),'XData',x,'YData',y), axis image, colormap(jet(300));
+% I_P_noise = I_P + 2*randn(size(I_P)); %noiseを加えたい場合
+% image(I_P, 'XData',u,'YData',v), axis image,colormap(jet(150));xlabel('u');ylabel('v');%投影図を図示
+% imshow(I_P/202, 'InitialMagnification','fit');
+% 
+% i_p=fftshift(fft2(I_P));
+%  x = (-0.5:1/1200:0.5);
+%  y = (-0.5:1/100:0.5);
+% image(abs(i_p),'XData',x,'YData',y), axis image, colormap(jet(300));
 end
