@@ -2,7 +2,7 @@ function V = my3D(x, y, z, dz, rho, omega, domega, theta, mu, c, sigma, m, l)
 %% equation(5)
 norm=zeros(m,length(unique(rho)));%Normal Distribution
 for i=1:m
-    norm(i,:)=normpdf(unique(rho),2*(i-1)*mu+c,sigma);
+    norm(i,:)=normpdf(unique(rho),(i-1)*mu+c,sigma);
 end
 phi=zeros(l,length(unique(rho)),2);
 for i=1:l
