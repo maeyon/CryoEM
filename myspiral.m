@@ -1,13 +1,15 @@
 %creation_of_spiral_image
 %% Assumption
-x=0:120;y=0:120;z=0:360;%Cartesian coordinates
-omega=zeros(length(x), length(y));rho=zeros(length(x), length(y));
-for i=1:length(x)
-    for j=1:length(y)
-        omega(i,j)=atan((y(j)-max(y)/2)/(x(i)-max(x)/2));%Angular coordinate
-        rho(i,j)=sqrt((x(i)-max(x)/2).^2+(y(j)-max(y)/2).^2); %Radial coordinate
-    end
-end
+x=-60:60;y=-60:60;z=0:360;%Cartesian coordinates
+Lx = length(x);
+Ly = length(y);
+Lz = length(z);
+
+omega=zeros(Lx, Ly);rho=zeros(Lx, Ly);
+[X,Y] = meshgrid(x,y)
+omega = atan(Y./X);
+rho=sqrt(X.^2+Y.^2);
+
 %% create 3D volume image
 l=20;m=10;%sample point(need to be over 4)
 mu=max(x)/(2*(2*m-1));%mean
